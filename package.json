@@ -1,0 +1,40 @@
+{
+  "name": "totemscript",
+  "displayName": "TotemScript",
+  "description": "TotemScript Language Support",
+  "repository": "https://github.com/widberg/totemscript",
+  "publisher": "widberg",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.79.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "tsc",
+        "aliases": [
+          "TotemScript",
+          "tsc"
+        ],
+        "extensions": [
+          ".tsc",
+          ".pc",
+          ".x36",
+          ".X36",
+          ".PS3"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tsc",
+        "scopeName": "source.tsc",
+        "path": "./syntaxes/tsc.tmLanguage.json"
+      }
+    ]
+  }
+}

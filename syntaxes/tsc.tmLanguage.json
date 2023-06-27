@@ -1,0 +1,158 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "tsc",
+	"patterns": [
+		{
+			"include": "#directives"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#commands"
+		},
+		{
+			"include": "#arguments"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#constants"
+		},
+		{
+			"include": "#operators"
+		}
+	],
+	"repository": {
+		"directives": {
+			"patterns": [
+				{
+					"match": "(?i)\\s*(#set|#define|#unset|#if|#ifdef|#ifnot|#ifndef|#else|#endif)\\s+",
+					"name": "meta.preprocessor.tsc"
+				}
+			]
+		},
+		"commands": {
+			"patterns": [
+				{
+					"match": "^\\s*[0-9a-zA-Z_]+",
+					"name": "keyword.control.directive.tsc"
+				}
+			]
+		},
+		"arguments": {
+			"patterns": [
+				{
+					"match": "%\\d+",
+					"name": "meta.preprocessor.macro.tsc"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.tsc",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"match": "\\\\[\"\\\\]",
+					"name": "constant.character.escape.tsc"
+				},
+				{
+					"match": "\\\\.",
+					"name": "invalid.illegal.unknown-escape.tsc"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"match": "\\b\\d+\\b",
+					"name": "constant.numeric.tsc"
+				}
+			]
+		},
+		"constants": {
+			"patterns": [
+				{
+					"match": "(?i)\\b(true|false|on|off)\\b",
+					"name": "constant.language.tsc"
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"match": "\\|\\||&&",
+					"name": "keyword.operator.logical.tsc"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"captures": {
+						"1": {
+							"name": "meta.toc-list.banner.block.tsc"
+						}
+					},
+					"match": "^/\\* =(\\s*.*?)\\s*= \\*/$\\n?",
+					"name": "comment.block.tsc"
+				},
+				{
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.begin.tsc"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.end.tsc"
+						}
+					},
+					"name": "comment.block.tsc"
+				},
+				{
+					"match": "\\*/.*\\n",
+					"name": "invalid.illegal.stray-comment-end.tsc"
+				},
+				{
+					"captures": {
+						"1": {
+							"name": "meta.toc-list.banner.line.tsc"
+						}
+					},
+					"match": "^// =(\\s*.*?)\\s*=\\s*$\\n?",
+					"name": "comment.line.banner.tsc"
+				},
+				{
+					"begin": "(^[ \\t]+)?(?=//)",
+					"beginCaptures": {
+						"1": {
+							"name": "punctuation.whitespace.comment.leading.tsc"
+						}
+					},
+					"end": "(?!\\G)",
+					"patterns": [
+						{
+							"begin": "//",
+							"beginCaptures": {
+								"0": {
+									"name": "punctuation.definition.comment.tsc"
+								}
+							},
+							"end": "\\n",
+							"name": "comment.line.double-slash.tsc"
+						}
+					]
+				}
+			]
+		}
+	},
+	"scopeName": "source.tsc"
+}
